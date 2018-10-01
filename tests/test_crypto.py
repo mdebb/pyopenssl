@@ -3463,6 +3463,24 @@ class TestCRL(object):
         crypto_crl = crl.to_cryptography()
         assert isinstance(crypto_crl, x509.CertificateRevocationList)
 
+    def test_crl_last_update(self):
+        """
+        `set_lastUpdate` in _make_test_crl should set the correct date
+        """
+        root_crl = self._make_test_crl(
+            self.root_cert, self.root_key, certs=[self.intermediate_cert])
+        cryptograpy_crl = root_crl.to_cryptography()
+        assert cryptograpy_crl.last_update == datetime(2014, 6, 1, 0, 0)
+
+    def test_crl_next_update(self):
+        """
+        `set_nextUpdate` in _make_test_crl should set the correct date
+        """
+        root_crl = self._make_test_crl(
+            self.root_cert, self.root_key, certs=[self.intermediate_cert])
+        cryptograpy_crl = root_crl.to_cryptography()
+        assert cryptograpy_crl.next_update == datetime(2018, 6, 1, 0, 0)
+
 
 class TestX509StoreContext(object):
     """
