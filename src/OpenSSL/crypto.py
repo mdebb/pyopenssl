@@ -160,6 +160,8 @@ def _set_asn1_time(boundary, when):
     if set_result == 0:
         raise ValueError("Invalid string")
 
+    assert(boundary != _ffi.NULL)
+
 
 def _get_asn1_time(timestamp):
     """
